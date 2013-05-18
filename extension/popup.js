@@ -10,18 +10,7 @@ microAjax(
     }
 );
 
-/**
- * Displays "Settings saved" message.
- */
-function showInfo() {
-    var el = document.getElementById('info-msg');
 
-    el.style.display = '';
-
-    setTimeout(function() {
-        el.style.display = 'none';
-    }, 1000);
-}
 
 /**
  * Simple plugins loader (only for developing purpose).

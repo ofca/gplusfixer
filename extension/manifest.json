@@ -15,8 +15,7 @@
         "matches": ["https://plus.google.com/*"],
         "js": [
             "helpers.js",
-            "plugins/scrolls/background.js",
-            "plugins/comment-box/background.js",
+            "plugins/ania-gabrys/background.js",
             "background.js"
         ],
         "all_frames": true,

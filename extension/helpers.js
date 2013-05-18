@@ -126,6 +126,10 @@ nano.$ = function(s) {
     return document[c?'getElement'+c:'querySelectorAll'](s.slice(1))
 };
 
+nano.qs = function(s) {
+    return document.querySelector(s);
+};
+
 nano.bind = function(el, eventName, callback) {
     if (typeof el == 'string') {
         el = nano.$(el);
@@ -141,4 +145,70 @@ nano.bind = function(el, eventName, callback) {
     } else {
         el.addEventListener(eventName, callback, false);
     }
+};
+
+/**
+ * Displays "Settings saved" message.
+ */
+nano.showInfo = function() {
+    var el = document.getElementById('info-msg');
+
+    el.style.display = '';
+
+    setTimeout(function() {
+        el.style.display = 'none';
+    }, 1000);
+}
+
+nano.autosave = function() {
+    var i = 0,
+        list = Array.prototype.slice.call(arguments),
+        len = list.length,
+        item, el, obj;
+
+    for (; i < len, item = list[i]; i++) {
+        el = nano.qs('*[data-autosave='+item+']');
+
+        if (el) {            
+
+            switch (el.type) {
+                case 'text':
+                    nano.bind(el, 'change', function() {
+                        obj = {};               
+                        obj[this.getAttribute('data-autosave')] = this.value;
+
+                        chrome.storage.sync.set(obj, nano.showInfo);
+                    });
+                    break;
+                case 'checkbox':
+                    nano.bind(el, 'click', function() {
+                        obj = {};
+                        obj[this.getAttribute('data-autosave')] = this.checked;
+
+                        chrome.storage.sync.set(obj, nano.showInfo);
+                        
+                    });
+                    break;
+            }
+        }
+    }
+
+    chrome.storage.sync.get(list, function(item) {
+        i = 0;
+
+        for (; i < len; i++) {
+            if (item[list[i]]) {
+                var el = nano.qs('input[data-autosave='+list[i]+']');
+
+                switch (el.type) {
+                    case 'text':
+                        el.value = item[list[i]];
+                        break;
+                    case 'checkbox':
+                        el.checked = true;
+                        break;
+                }
+            }
+        }
+    });
 };
