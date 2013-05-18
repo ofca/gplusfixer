@@ -127,5 +127,18 @@ nano.$ = function(s) {
 };
 
 nano.bind = function(el, eventName, callback) {
-    (typeof el == 'string' ? nano.$(el)[0] : el).addEventListener(eventName, callback, false); 
+    if (typeof el == 'string') {
+        el = nano.$(el);
+    }
+
+    if (Object.prototype.toString.call(el) == '[object Array]') {
+        var i = 0,
+            len = el.length;
+
+        for (; i < len; i++) {
+            el[i].addEventListener(eventName, callback, false);
+        }
+    } else {
+        el.addEventListener(eventName, callback, false);
+    }
 };
