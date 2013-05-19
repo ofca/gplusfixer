@@ -16,6 +16,7 @@
         "js": [
             "helpers.js",
             "plugins/ania-gabrys/background.js",
+            "plugins/nav/background.js",
             "background.js"
         ],
         "all_frames": true,
