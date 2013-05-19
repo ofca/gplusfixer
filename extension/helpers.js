@@ -172,6 +172,7 @@ nano.autosave = function() {
         if (el) {            
 
             switch (el.type) {
+                case 'select-one':
                 case 'text':
                     nano.bind(el, 'change', function() {
                         obj = {};               
@@ -198,7 +199,7 @@ nano.autosave = function() {
 
         for (; i < len; i++) {
             if (item[list[i]]) {
-                var el = nano.qs('input[data-autosave='+list[i]+']');
+                var el = nano.qs('*[data-autosave='+list[i]+']');
 
                 switch (el.type) {
                     case 'text':
@@ -206,6 +207,17 @@ nano.autosave = function() {
                         break;
                     case 'checkbox':
                         el.checked = true;
+                        break;
+                    case 'select-one':
+                        var j = 0,
+                            els = el.getElementsByTagName('option'),
+                            _len = els.length;
+
+                        for (; j < _len; j++) {
+                            if (els[j].value == item[list[i]]) {
+                                el.selectedIndex = j;
+                            }
+                        }
                         break;
                 }
             }

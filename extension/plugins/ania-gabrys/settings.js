@@ -1,6 +1,1 @@
-(function(nano) {
-
-    nano.autosave('commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent');
-
-  
-})(nano);
+nano.autosave('commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize');

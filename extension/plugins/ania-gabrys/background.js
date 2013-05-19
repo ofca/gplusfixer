@@ -1,4 +1,4 @@
-var keys = ['removeScrolls', 'fullPostContent', 'fullCommentContent'];
+var keys = ['removeScrolls', 'fullPostContent', 'fullCommentContent', 'commentBoxHeight', 'defaultFont', 'fontSize'];
 
 // Load settings
 chrome.storage.sync.get(keys, function(item) {
@@ -22,6 +22,19 @@ chrome.storage.sync.get(keys, function(item) {
         /* comment "read more" */
         STYLES += ".a-n.wj.syxni.unQkyd[role=button], .a-n.vj.unQkyd[role=button] { display: none !important; }";
     }
+
+    if (item.commentBoxHeight) {
+        /* comment textarea */
+        STYLES += ".yd.editable[role=textbox] { max-height: "+item.commentBoxHeight+"px !important; }\n";
+    }
+
+    if (item.defaultFont) {
+        STYLES += "body { font-family: '"+item.defaultFont+"' !important; }\n";
+    }
+
+    if (item.fontSize) {
+        STYLES += "body, .vFgtwf { font-size: "+item.fontSize+"px !important; }\n";
+    }
 });
 
 
@@ -29,5 +42,3 @@ chrome.storage.sync.get(keys, function(item) {
 
 
 
-/* comment textarea */
-//STYLES += ".yd.editable[role=textbox] { max-height: 500px !important; }\n";

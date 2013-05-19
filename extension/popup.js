@@ -1,5 +1,7 @@
 var body = document.getElementsByTagName('body')[0];
 
+nano.bind('#saveBtn', 'click', nano.showInfo);
+
 microAjax(
     chrome.extension.getURL('plugins.json'), 
     function(response) {

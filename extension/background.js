@@ -1,8 +1,6 @@
 (function(window) {
     window.addEventListener('DOMContentLoaded', function(event) {
-        console.log('hello from bg');
-        console.log(STYLES);
-        applyStyles(STYLES+"\n ");
+        applyStyles(STYLES);
 
         function applyStyles(styles) {
             var styleElement = document.createElement("style");
