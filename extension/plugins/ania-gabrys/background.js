@@ -3,8 +3,9 @@ var keys = ['removeScrolls', 'fullPostContent', 'fullCommentContent', 'commentBo
 // Load settings
 chrome.storage.sync.get(keys, function(item) {
     if (item.removeScrolls) {
-        /* notification window scroll */
-        STYLES += ".O7.mP.CLSMk { max-height: inherit !important; }\n";
+        /* Notification window scroll */
+        /* First expression is for normal post, second is for post in notification window */
+        STYLES += ".Pw3i3b.ee3yFe.oeIGR.XkmQbb .O7.mP.CLSMk, .P9a .Tg.Sb.ChZ7Rc .O7.mP.CLSMk { max-height: inherit !important; }\n";
     }
 
     if (item.fullPostContent) {
