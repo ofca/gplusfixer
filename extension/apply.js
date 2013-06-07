@@ -51,6 +51,9 @@ var styles = {
     ],
     'fontSize': [
         "body, .vFgtwf { font-size: {size}px !important; }"
+    ],
+    'commentLinksColor': [
+        ".WamaFb a { color: #{color} !important; }"
     ]
 };
 
@@ -61,12 +64,19 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 // Load
-var list = ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 'slimNav'],
+var list = ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 'slimNav', 'commentLinksColor'],
     len = list.length
     i = 0;
 chrome.storage.sync.get(list, function(item) {
     for (; i < len; i++) {
-        _apply(list[i], item[list[i]]);
+        var option = list[i],
+            value = item[option];
+
+        if (value === [][0]) {
+            continue;
+        }
+
+        _apply(option, value);
     }
 });
    
@@ -88,10 +98,19 @@ function _apply(option, value) {
         applyStyles('defaultFont', styles.defaultFont.join("\n").replace('{font}', value));
     } else if (option == 'fontSize') {
         applyStyles('fontSize', styles.fontSize.join("\n").replace('{size}', value));
+    } else if (option == 'commentLinksColor') {
+        if (value == '') {
+            removeStyles(option);            
+        } else {
+            applyStyles(option, styles[option].join("\n").replace('{color}', value));
+        }
     }
 };
 
 function applyStyles(id, styles) {
+    if (document.getElementById('gplusfixer-'+id)) {
+        removeStyles(id);
+    }
     var e = document.createElement("style");
     e.setAttribute("id", "gplusfixer-" + id);
     e.setAttribute("type", "text/css");

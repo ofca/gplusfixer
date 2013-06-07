@@ -1,4 +1,4 @@
-<div class="gpf-panels">
+<div class="gpf-panels" style='display: none'>
     <div class='gpf-panels-inner'>
         <a class='gpf-close' id='gpf-close'>&#10005;</a>
         <div id="gpf-panel-settings">
@@ -24,13 +24,19 @@
                     <label class='checkbox'><input type='checkbox' data-autosave='fullCommentContent'> Display full comment content</label>
                 </div>
             </div>
-            <div class='item noborder'>
+            <div class='item'>
                 <div class='control-group'>
                     <label class='control-group pull-left'>Comment box resize up to:</label>
                     <div class='controls'>
                         <input type='text' data-autosave='commentBoxHeight' value='500' style='width: 50px;'>
                     </div>
                     <div class='clearfix'></div>
+                </div>
+            </div>
+            <div class='item noborder'>
+                <div class='control-group'>
+                    <label class='checkbox'><input type='checkbox' id='gpf-commentChangeLinksColor'> Change color of links</label>
+                    <label style='margin: 0 4px 0 20px'>Color:</label><input type='text' data-autosave='commentLinksColor' id='gpf-commentLinksColor' value='' style='width: 50px' disabled='disabled'>
                 </div>
             </div>
 
