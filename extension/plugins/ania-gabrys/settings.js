@@ -1,1 +1,0 @@
-nano.autosave('commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize');

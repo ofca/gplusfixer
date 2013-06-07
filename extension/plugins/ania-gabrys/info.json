@@ -1,9 +1,0 @@
-{
-    "name": "anna-gabrys",
-    "description": "Fixes for bugs requested by Anna Grabyś
-        * Removes 'Read more' from posts; display all content
-        * Comment box will resize up to 500px height
-        * Removes 'Read more' from comments; display whole comment
-        * Removes scroll in the notification window
-    "
-}

@@ -1,61 +1,50 @@
-<!doctype html>
-<html>
-    <head>
-        <style>
-            body { width: 300px; font-family: Arial; font-size: 11px; background: #427fed; border-radius: 2px; padding: 10px; color: #fff; }
-            .item { padding: 4px 0; border-bottom: 1px dashed #7EA5ED; min-height: 24px; }
-                label.checkbox input[type=checkbox] { position: relative; bottom: -2px; }
-                input[type=text] { border-radius: 4px; border: 1px solid #7EA5ED; font-size: 11px; padding: 2px 4px; }
-                label { margin-top: 5px; }
-            .pull-left { float: left; }
-            .pull-right { float: right; }
-            .clearfix { clear: both; }
+<div class="gpf-panels">
+    <div class='gpf-panels-inner'>
+        <a class='gpf-close' id='gpf-close'>&#10005;</a>
+        <div id="gpf-panel-settings">
+            <h2>Look &amp; feel</h2>
 
-            .buttons { padding-top: 15px; }
-            .btn-white { border-radius: 2px; background: #fff; color: #427fed; padding: 2px 5px; font-weight: bold; cursor: pointer; }
-
-            h1 { font-size: 14px; }
-
-            #info-msg { background: #fff; padding: 2px 5px; color: #427fed; position: absolute; top: 25px; right: 20px; border-radius: 4px; }
-        </style>
-</head>
-<body>
-    <div id='info-msg' style='display: none'>Changes saved.</div>
-    <h1>GPlusFixer</h1>
-    <div id='gpf-options'>
-        <div id='anna-gabrys'>
-            <div class='item'>
+            <h3>Navigation</h3>
+            <div class='item noborder'>
                 <div class='control-group'>
-                    <label class='checkbox'><input type='checkbox' data-autosave='removeScrolls'> I don't want to scroll anymore!</label>
+                    <label class='checkbox'><input type='checkbox' data-autosave='slimNav' data-autochange> Navigation should be tiny &amp; visible!</label>
                 </div>
             </div>
-            <div class='item'>
+
+            <h3>Posts</h3>
+            <div class='item noborder'>
                 <div class='control-group'>
                     <label class='checkbox'><input type='checkbox' data-autosave='fullPostContent'> Display full post content</label>
                 </div>
             </div>
+
+            <h3>Comments</h3>
             <div class='item'>
                 <div class='control-group'>
                     <label class='checkbox'><input type='checkbox' data-autosave='fullCommentContent'> Display full comment content</label>
                 </div>
             </div>
-            <div class='item'>
+            <div class='item noborder'>
                 <div class='control-group'>
                     <label class='control-group pull-left'>Comment box resize up to:</label>
                     <div class='controls'>
-                        <input type='text' data-autosave='commentBoxHeight' value='500' style='width: 50px;' class='pull-right'>
+                        <input type='text' data-autosave='commentBoxHeight' value='500' style='width: 50px;'>
                     </div>
                     <div class='clearfix'></div>
                 </div>
             </div>
+
+            <h3>Misc</h3>
             <div class='item'>
+                <div class='control-group'>
+                    <label class='checkbox'><input type='checkbox' data-autosave='removeScrolls'> Remove unnecessary (aka annoying) scrolls</label>
+                </div>
+            </div>
+            <div class='item noborder'>
                 <div class='control-group'>
                     <label class='control-group pull-left'>Default font:</label>
                     <div class='controls'>
-
-                        <input type='text' data-autosave='fontSize' class='pull-right' value='13' style='width: 30px'>
-                        <label class='pull-right' style='margin: 5px 5px 0 10px;'>size</label>
-                        <select data-autosave='defaultFont' class='pull-right'>
+                        <select data-autosave='defaultFont'>
                             <option value='Roboto'>Roboto (default)</option>
                             <option value='Antiqua'>Antiqua</option>
                             <option value='Arial'>Arial</option>
@@ -81,27 +70,24 @@
                             <option value='Times New Roman'>Times New Roman</option>
                             <option value='Verdana'>Verdana</option>
                         </select>
+                        <label style='margin: 5px 5px 0 10px;'>size</label>
+                        <input type='text' data-autosave='fontSize' value='13' style='width: 30px'>
                     </div>
                     <div class='clearfix'></div>
                 </div>
             </div>
-        </div>
-        <div id='nav'>
-            <div class='item'>
-                <div class='control-group'>
-                    <label class='checkbox'><input type='checkbox' data-autosave='slimNav'> Navigation should be tiny &amp; visible!</label>
+        </div>    
+    </div>
+</div>
+<script type='text/template' id='tmplGPlusFixerNavLink'>
+    <div class="cS xWa">
+        <a class="FW9qdb F9a SX">
+            <div aria-hidden="true" class="E9a yWa">
+                <div class="zHqZee">
+                    <div class="NIa cOa HS1ZWb Gdb" style="background: url({icon}) no-repeat"></div>
                 </div>
+                <div class="A9a bOa">{text}</div>
             </div>
-        </div>
+        </a>
     </div>
-    <div class='buttons'>
-        <!-- Yes, I know this button do nothing -->
-        <a class='btn btn-white' id='saveBtn'>Save</a>
-    </div>
-
-    <p>Refresh page to see changes.</p>
-    <script src='helpers.js'></script>
-    <script src='popup.js'></script>
-
-</body>
-</html>
+</script>
