@@ -137,8 +137,18 @@
             head: null
         },
         visible: false,
-        fieldsToAutosave: ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 'slimNav', 'commentLinksColor',
-            'layoutSingleColumn'],
+        fieldsToAutosave: [
+            'commentBoxHeight', 
+            'removeScrolls', 
+            'fullPostContent', 
+            'fullCommentContent', 
+            'defaultFont', 
+            'fontSize', 
+            'slimNav', 
+            'commentLinksColor',
+            'layoutDefaultColumn',
+            'layoutSingleColumn'
+        ],
         init: function() {
             gpf.dom.body = _$('=body')[0];
             gpf.dom.head = _$('=head')[0];
@@ -263,16 +273,22 @@
                 me.sendMessage(req);
             });
 
-            _bind('#gpf-layoutSingleColumnCheckbox', 'click', function() {                
+            _bind('#gpf-layoutDefaultColumnRadio', 'click', function() {                
                 var el = _$('#gpf-layoutSingleColumn');
 
-                if (this.checked) {
-                    el.removeAttribute('disabled');
-                    el.value = '700';
-                } else {
-                    el.setAttribute('disabled');
-                    el.value = '';
-                }
+                obj = {};
+                obj['layoutDefaultColumn'] = el.value;
+
+                chrome.storage.sync.set(obj);
+
+                req.option = 'layoutDefaultColumn';
+                req.value = el.value;
+
+                me.sendMessage(req);
+            });
+
+            _bind('#gpf-layoutSingleColumnRadio', 'click', function() {                
+                var el = _$('#gpf-layoutSingleColumn');
 
                 obj = {};
                 obj['layoutSingleColumn'] = el.value;
@@ -305,8 +321,8 @@
                                     _$('#gpf-commentChangeLinksColor').checked = true;
                                     el.removeAttribute('disabled');
                                 }
-                                if (list[i] == 'layoutSingleColumn') {
-                                    _$('#gpf-layoutSingleColumnCheckbox').checked = true;
+                                if (list[i] == 'layoutSingleColumn' || list[i] == 'layoutDefaultColumn') {
+                                    _$('#gpf-' + list[i] + 'Radio').selected = true;
                                     el.removeAttribute('disabled');
                                 }
                                 el.value = item[list[i]];
