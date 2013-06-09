@@ -22,6 +22,9 @@ var styles = {
 
         /* header with page title */
         ".IvwRoc.Um8btf { left: 50px !important; }",
+
+        /* Remove shadow */
+        ".M8jNpf { box-shadow: none !important; }"
     ],
     'removeScrolls': [
         /* Notification window scroll */

@@ -136,7 +136,7 @@
             body: null,
             head: null
         },
-        visible: true,
+        visible: false,
         fieldsToAutosave: ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 'slimNav', 'commentLinksColor'],
         init: function() {
             gpf.dom.body = _$('=body')[0];
