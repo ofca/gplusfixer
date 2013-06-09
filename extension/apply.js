@@ -57,6 +57,17 @@ var styles = {
     ],
     'commentLinksColor': [
         ".WamaFb a { color: #{color} !important; }"
+    ],
+    'layoutSingleColumn': [
+        // Remove left margin from posts in columns
+        ".wIa.LP.ad .XkmQbb+.XkmQbb { margin-left: 0 !important; }",
+        ".wIa.LP.ad .HTAwOd.RbrTP.PMortc { width: {width}px !important; }",
+        ".wIa.LP.ad .oeIGR { width: {width}px !important; }",
+        ".wIa.LP.ad .uBFlYd.EyKftc { width: {widthInput}px !important; max-width: none !important; }",
+        // Communities view
+        ".VsujAd { width: {width}px !important; }",
+        ".HTAwOd.RbrTP.cB8ykb { width: {width}px !important; }",
+        ".qyoDxe.v2DU7e { width: {width}px !important"
     ]
 };
 
@@ -67,7 +78,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 // Load
-var list = ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 'slimNav', 'commentLinksColor'],
+var list = ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 'slimNav', 'commentLinksColor', 'layoutSingleColumn'],
     len = list.length
     i = 0;
 chrome.storage.sync.get(list, function(item) {
@@ -106,6 +117,21 @@ function _apply(option, value) {
             removeStyles(option);            
         } else {
             applyStyles(option, styles[option].join("\n").replace('{color}', value));
+        }
+    } else if (option == 'layoutSingleColumn') {
+        if (value == '') {
+            removeStyles(option);            
+        } else {
+            applyStyles(option, 
+                styles[option]
+                .join("\n")
+                .replace('{width}', value)
+                .replace('{width}', value)
+                .replace('{width}', value)
+                .replace('{width}', value)
+                .replace('{width}', value)
+                .replace('{widthInput}', parseInt(value) - 40)
+            );
         }
     }
 };

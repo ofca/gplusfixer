@@ -137,7 +137,8 @@
             head: null
         },
         visible: false,
-        fieldsToAutosave: ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 'slimNav', 'commentLinksColor'],
+        fieldsToAutosave: ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 'slimNav', 'commentLinksColor',
+            'layoutSingleColumn'],
         init: function() {
             gpf.dom.body = _$('=body')[0];
             gpf.dom.head = _$('=head')[0];
@@ -169,18 +170,6 @@
                     el.id = 'gplusfixer-ui';
                     el.innerHTML = output;
                     me.dom.body.appendChild(el);
-
-                   
-
-                    /*_bind('#me-click', 'click', function() {
-                        chrome.extension.sendMessage({
-                            method: 'clicked',
-                            test: 'test'
-                        }, function(res) {
-                            console.log('kupa!', res);
-                        });
-                    });*/
-
                     me.dom.wrapper = el;
 
                     // Add settings button to left nav
@@ -274,6 +263,28 @@
                 me.sendMessage(req);
             });
 
+            _bind('#gpf-layoutSingleColumnCheckbox', 'click', function() {                
+                var el = _$('#gpf-layoutSingleColumn');
+
+                if (this.checked) {
+                    el.removeAttribute('disabled');
+                    el.value = '700';
+                } else {
+                    el.setAttribute('disabled');
+                    el.value = '';
+                }
+
+                obj = {};
+                obj['layoutSingleColumn'] = el.value;
+
+                chrome.storage.sync.set(obj);
+
+                req.option = 'layoutSingleColumn';
+                req.value = el.value;
+
+                me.sendMessage(req);
+            });
+
             // Bind close button
             _bind('#gpf-close', 'click', me.onSettingTabClick);
         },
@@ -288,12 +299,16 @@
                         var el = _qs('*[data-autosave='+list[i]+']');
 
                         switch (el.type) {
-                            case 'text': console.log(item[list[i]]);
+                            case 'text':
                                 // Check checkbox
                                 if (list[i] == 'commentLinksColor') {
                                     _$('#gpf-commentChangeLinksColor').checked = true;
                                     el.removeAttribute('disabled');
-                                }                                
+                                }
+                                if (list[i] == 'layoutSingleColumn') {
+                                    _$('#gpf-layoutSingleColumnCheckbox').checked = true;
+                                    el.removeAttribute('disabled');
+                                }
                                 el.value = item[list[i]];
                                 break;
                             case 'checkbox':
