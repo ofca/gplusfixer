@@ -273,58 +273,43 @@
                 me.sendMessage(req);
             });
 
+            function layoutInputs() {
+                el = _$('@gpf-layout');
+                for (var i = 0; i < el.length; i++) {
+                    var n = el[i].getAttribute('data-name');
+                    var m = _$('#gpf-' + n);
+                    m.value = '';
+                    if(el[i].checked) {
+                        m.removeAttribute('disabled');
+                        if(n == 'layoutSingleColumn') {
+                            m.value = '700';
+                        }
+                    } else {
+                        m.setAttribute('disabled');
+                    }
+
+                    obj = {};
+                    obj[n] = m.value;
+
+                    chrome.storage.sync.set(obj);
+
+                    req.option = n;
+                    req.value = m.value;
+
+                    me.sendMessage(req);
+                }
+            }
+
             _bind('#gpf-layoutDefaultColumnRadio', 'click', function() {                
                 var el = _$('#gpf-layoutDefaultColumn');
-                var ea = _$('#gpf-layoutSingleColumn');
 
-                if (this.selected) {
-                    el.removeAttribute('disabled');
-                    el.value = '400';
-                    ea.setAttribute('disabled');
-                    ea.value = '';
-                } else {
-                    el.setAttribute('disabled');
-                    el.value = '';
-                    ea.removeAttribute('disabled');
-                    ea.value = '';
-                }
-
-                obj = {};
-                obj['layoutDefaultColumn'] = el.value;
-
-                chrome.storage.sync.set(obj);
-
-                req.option = 'layoutDefaultColumn';
-                req.value = el.value;
-
-                me.sendMessage(req);
+                layoutInputs();
             });
 
-            _bind('#gpf-layoutSingleColumnRadio', 'click', function() {                
+            _bind('#gpf-layoutSingleColumnRadio', 'click', function() {
                 var el = _$('#gpf-layoutSingleColumn');
-                var ea = _$('#gpf-layoutDefaultColumn');
 
-                if (this.selected) {
-                    el.removeAttribute('disabled');
-                    el.value = '700';
-                    ea.setAttribute('disabled');
-                    ea.value = '';
-                } else {
-                    el.setAttribute('disabled');
-                    el.value = '';
-                    ea.removeAttribute('disabled');
-                    ea.value = '';
-                }
-
-                obj = {};
-                obj['layoutSingleColumn'] = el.value;
-
-                chrome.storage.sync.set(obj);
-
-                req.option = 'layoutSingleColumn';
-                req.value = el.value;
-
-                me.sendMessage(req);
+                layoutInputs();
             });
 
             // Bind close button
@@ -348,7 +333,7 @@
                                     el.removeAttribute('disabled');
                                 }
                                 if (list[i] == 'layoutSingleColumn' || list[i] == 'layoutDefaultColumn') {
-                                    _$('#gpf-' + list[i] + 'Radio').selected = true;
+                                    _$('#gpf-' + list[i] + 'Radio').checked = true;
                                     el.removeAttribute('disabled');
                                 }
                                 el.value = item[list[i]];
