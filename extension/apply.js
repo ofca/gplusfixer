@@ -58,6 +58,11 @@ var styles = {
     'commentLinksColor': [
         ".WamaFb a { color: #{color} !important; }"
     ],
+    'layoutDefaultColumn': [
+        ".qyoDxe.v2DU7e { width: {layoutWidth}px !important; }",
+        ".HTAwOd.RbrTP.PMortc { width: {contentWidth}px !important; }",
+        ".Pw3i3b.ee3yFe.oeIGR.XkmQbb { width: {boxWidth}px !important; }"
+    ],
     'layoutSingleColumn': [
         // Remove left margin from posts in columns
         ".wIa.LP.ad .XkmQbb+.XkmQbb { margin-left: 0 !important; }",
@@ -65,9 +70,10 @@ var styles = {
         ".wIa.LP.ad .oeIGR { width: {width}px !important; }",
         ".wIa.LP.ad .uBFlYd.EyKftc { width: {widthInput}px !important; max-width: none !important; }",
         // Communities view
-        ".VsujAd { width: {width}px !important; }",
+        ".VsujAd { width: 100% !important; }",
         ".HTAwOd.RbrTP.cB8ykb { width: {width}px !important; }",
-        ".qyoDxe.v2DU7e { width: {width}px !important"
+        ".qyoDxe.v2DU7e { width: {widthMain}px !important"
+
     ]
 };
 
@@ -78,7 +84,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 // Load
-var list = ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 'slimNav', 'commentLinksColor', 'layoutSingleColumn'],
+var list = ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 'slimNav', 'commentLinksColor', 'layoutDefaultColumn', 'layoutSingleColumn'],
     len = list.length
     i = 0;
 chrome.storage.sync.get(list, function(item) {
@@ -118,18 +124,30 @@ function _apply(option, value) {
         } else {
             applyStyles(option, styles[option].join("\n").replace('{color}', value));
         }
-    } else if (option == 'layoutSingleColumn') {
+    } else if (option == 'layoutDefaultColumn') {
         if (value == '') {
             removeStyles(option);            
         } else {
+            value = parseInt(value);
             applyStyles(option, 
                 styles[option]
+                .join("\n")
+                .replace('{layoutWidth}', (value * 2 + 134))
+                .replace('{contentWidth}', (value * 2 + 20))
+                .replace('{boxWidth}', value)
+            );
+        }
+    } else if (option == 'layoutSingleColumn') {
+        if(value == '') {
+            removeStyles(option);
+        } else {
+            applyStyles(option, styles[option]
                 .join("\n")
                 .replace('{width}', value)
                 .replace('{width}', value)
                 .replace('{width}', value)
                 .replace('{width}', value)
-                .replace('{width}', value)
+                .replace('{widthMain}', value + 134)
                 .replace('{widthInput}', parseInt(value) - 40)
             );
         }

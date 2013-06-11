@@ -2,7 +2,7 @@
     <div class='gpf-panels-inner'>
         <a class='gpf-close' id='gpf-close'>&#10005;</a>
         <div id="gpf-panel-settings">
-            <h2>Look &amp; feel</h2>
+            <h2>GPlusFixer settings</h2>
 
             <h3>Navigation</h3>
             <div class='item noborder'>
@@ -41,11 +41,19 @@
             </div>
 
             <h3>Layout</h3>
+            <div class='item'>
+                <div class='control-group'>
+                    <label class='radio'><input type='radio' name='gpf-layout' data-name='layoutDefaultColumn' id='gpf-layoutDefaultColumnRadio'> Default</label>                   
+                </div>
+                <label style='margin: 0 4px 0 20px'>Box width:</label><input type='text' data-autosave='layoutDefaultColumn' id='gpf-layoutDefaultColumn' value='' style='width: 50px'>
+            </div>
             <div class='item noborder'>
                 <div class='control-group'>
-                    <label class='checkbox'><input type='checkbox' id='gpf-layoutSingleColumnCheckbox'> Single column</label>
-                    <label style='margin: 0 4px 0 20px'>Color:</label><input type='text' data-autosave='layoutSingleColumn' id='gpf-layoutSingleColumn' value='' style='width: 50px' disabled='disabled'>
+                    <label class='radio'><input type='radio' name='gpf-layout' data-name='layoutSingleColumn' id='gpf-layoutSingleColumnRadio'> Single column</label>                   
                 </div>
+                <label style='margin: 0 4px 0 20px'>Width:</label><input type='text' data-autosave='layoutSingleColumn' id='gpf-layoutSingleColumn' value='' style='width: 50px' disabled='disabled'>
+
+                <span style='font-style: italic; display: block;'>Turn off G+ single layout mode first!</span>
             </div>
 
             <h3>Misc</h3>

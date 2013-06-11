@@ -1,39 +1,28 @@
 {
-    "manifest_version": 2,
-
-    "name": "GPlusFixer",
-    "description": "Ofca for the rescue! Removes some minor bugs from new version of GooglePlus",
-    "version": "0.2.3",
-
-    /*"browser_action": {
-        "default_icon": "ofca-hat-48.png",
-        "default_popup": "popup.html",
-        "default_title": "GPlusFixer"
-    },*/
-
-    "background": {
-        "page": "background.html"
-    },
-
-    "content_scripts": [{
-        "matches": ["https://plus.google.com/*"],
-        "js": [
-            "apply.js"
-        ],
-        "all_frames": true,
-        "run_at": "document_start"
-    },{ 
-        "matches": ["https://plus.google.com/*"],
-        "js": [
-            "ui.js"
-        ],
-        "all_frames": false,
-        "run_at": "document_start"
-    }],
-    "permissions": ["tabs", "storage", "https://plus.google.com/*"],
-    "web_accessible_resources": ["ofca-hat-19.png", "styles.css", "ui.html"],
-    "icons": {
+   "background": {
+      "page": "background.html"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "apply.js" ],
+      "matches": [ "https://plus.google.com/*" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": false,
+      "js": [ "ui.js" ],
+      "matches": [ "https://plus.google.com/*" ],
+      "run_at": "document_start"
+   } ],
+   "description": "Ofca for the rescue! Removes some minor bugs from new version of GooglePlus",
+   "icons": {
       "128": "ofca-hat-128.png",
       "48": "ofca-hat-48.png"
-    }
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCJ8T6KdP2+W4OybwWYtKAZzMtlX5SQSc2e2CD2Xul4Id38L1skK04xITgJADf+H5A2PmmdTll3yx82qI2kA87nCOdnbPaudX/9TwdYxQmonAhAwxbncbYkxD5aMWOa6uE/VPI/l+Yg5+mvJTmpOX7HyVKIj9Di89exfVy1K4iYRQIDAQAB",
+   "manifest_version": 2,
+   "name": "GPlusFixer",
+   "permissions": [ "tabs", "storage", "https://plus.google.com/*" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.3",
+   "web_accessible_resources": [ "ofca-hat-19.png", "styles.css", "ui.html" ]
 }
