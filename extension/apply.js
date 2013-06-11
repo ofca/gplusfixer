@@ -72,7 +72,8 @@ var styles = {
         // Communities view
         ".VsujAd { width: 100% !important; }",
         ".HTAwOd.RbrTP.cB8ykb { width: {width}px !important; }",
-        ".qyoDxe.v2DU7e { width: {width}px !important"
+        ".qyoDxe.v2DU7e { width: {widthMain}px !important"
+
     ]
 };
 
@@ -146,7 +147,7 @@ function _apply(option, value) {
                 .replace('{width}', value)
                 .replace('{width}', value)
                 .replace('{width}', value)
-                .replace('{width}', value)
+                .replace('{widthMain}', value + 134)
                 .replace('{widthInput}', parseInt(value) - 40)
             );
         }
