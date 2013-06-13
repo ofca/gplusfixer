@@ -137,8 +137,18 @@
             head: null
         },
         visible: false,
-        fieldsToAutosave: ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 'slimNav', 'commentLinksColor',
-            'layoutSingleColumn'],
+        fieldsToAutosave: [
+            'commentBoxHeight', 
+            'removeScrolls', 
+            'fullPostContent', 
+            'fullCommentContent', 
+            'defaultFont', 
+            'fontSize', 
+            'slimNav', 
+            'commentLinksColor',
+            'layoutDefaultColumn',
+            'layoutSingleColumn'
+        ],
         init: function() {
             gpf.dom.body = _$('=body')[0];
             gpf.dom.head = _$('=head')[0];
@@ -263,26 +273,43 @@
                 me.sendMessage(req);
             });
 
-            _bind('#gpf-layoutSingleColumnCheckbox', 'click', function() {                
+            function layoutInputs() {
+                el = _$('@gpf-layout');
+                for (var i = 0; i < el.length; i++) {
+                    var n = el[i].getAttribute('data-name');
+                    var m = _$('#gpf-' + n);
+                    m.value = '';
+                    if(el[i].checked) {
+                        m.removeAttribute('disabled');
+                        if(n == 'layoutSingleColumn') {
+                            m.value = '700';
+                        }
+                    } else {
+                        m.setAttribute('disabled');
+                    }
+
+                    obj = {};
+                    obj[n] = m.value;
+
+                    chrome.storage.sync.set(obj);
+
+                    req.option = n;
+                    req.value = m.value;
+
+                    me.sendMessage(req);
+                }
+            }
+
+            _bind('#gpf-layoutDefaultColumnRadio', 'click', function() {                
+                var el = _$('#gpf-layoutDefaultColumn');
+
+                layoutInputs();
+            });
+
+            _bind('#gpf-layoutSingleColumnRadio', 'click', function() {
                 var el = _$('#gpf-layoutSingleColumn');
 
-                if (this.checked) {
-                    el.removeAttribute('disabled');
-                    el.value = '700';
-                } else {
-                    el.setAttribute('disabled');
-                    el.value = '';
-                }
-
-                obj = {};
-                obj['layoutSingleColumn'] = el.value;
-
-                chrome.storage.sync.set(obj);
-
-                req.option = 'layoutSingleColumn';
-                req.value = el.value;
-
-                me.sendMessage(req);
+                layoutInputs();
             });
 
             // Bind close button
@@ -305,8 +332,8 @@
                                     _$('#gpf-commentChangeLinksColor').checked = true;
                                     el.removeAttribute('disabled');
                                 }
-                                if (list[i] == 'layoutSingleColumn') {
-                                    _$('#gpf-layoutSingleColumnCheckbox').checked = true;
+                                if (list[i] == 'layoutSingleColumn' || list[i] == 'layoutDefaultColumn') {
+                                    _$('#gpf-' + list[i] + 'Radio').checked = true;
                                     el.removeAttribute('disabled');
                                 }
                                 el.value = item[list[i]];
