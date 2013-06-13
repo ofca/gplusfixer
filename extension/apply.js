@@ -79,7 +79,11 @@ var styles = {
         ".ChZ7Rc .RJekRd { width: {bigPostWidth}px !important; min-height: auto !important; float: left !important; border-left: 6px solid #d6d6d6 !important; border-right: 6px solid #d6d6d6 !important; border-bottom: 6px solid #d6d6d6 !important; bottom: 0 !important; max-width: inherit !important; position: relative !important; right: 0 !important; top: 0 !important; }",
         ".ChZ7Rc .GFyXvc { bottom: none !important; left: none !important; right: none !important; opacity: 1 !important; position: relative !important; top: none !important; visibility: visible !important; }",
         ".ChZ7Rc .by0y2e { position: relative !important; }",
-        ".ChZ7Rc .qf.ii.wv4ec.r6Rtbe .CLSMk { max-height: inherit !important; }"
+        ".ChZ7Rc .qf.ii.wv4ec.r6Rtbe .CLSMk { max-height: inherit !important; }",
+        /* Fix for "new post notification" (this little blue button) */
+        /*".Ri07Rc.c-b { height: 40px !important; min-height: inherit !important; min-width: inherit !important; width: 100px !important; }",
+        ".Ri07Rc.c-b .F0INOe { width: 40px !important; float: left !important; margin: 10px 10px 0px 10px; }",
+        ".Ri07Rc.c-b { margin: 12px 5px 5px 5px !important; }"*/
     ]
 };
 
@@ -148,6 +152,7 @@ function _apply(option, value) {
         if(value == '') {
             removeStyles(option);
         } else {
+            value = parseInt(value);
             applyStyles(option, styles[option]
                 .join("\n")
                 .replace('{width}', value)
