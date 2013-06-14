@@ -1,14 +1,19 @@
 #gplusfixer-ui { position: fixed; z-index: 99999; bottom: -440px; left: 60px; }
-.gpf-close { position: absolute; top: 20px; right: 35px; text-decoration: none !important; border: 1px solid #e4e4e4; border-radius: 4px; padding: 2px 7px 4px 7px; }
-.gpf-panels { height: 400px; width: 400px; background: #fff; border-radius: 4px 4px 0 0; padding: 20px; border: 1px solid #eee; border-bottom: 0; }
-.gpf-panels-inner { overflow-x: hidden; overflow-y: scroll; height: inherit; width: 380px; padding-right: 20px; }
-.gpf-panels h2 { margin-bottom: 20px; }
-.gpf-panels h3 { margin-bottom: 5px; margin-top: 15px; border-bottom: 1px solid #e6e6e6; padding-bottom: 5px; text-transform: uppercase; font-size: 10px; }
-.gpf-panels .item { padding: 4px 0 4px 20px; border-bottom: 1px dashed #d6d6d6; min-height: 24px; }
-.gpf-panels .noborder { border: 0; }
-.gpf-panels label.checkbox input[type=checkbox] { position: relative; bottom: -2px; }
-.gpf-panels input[type=text] { border-radius: 4px; border: 1px solid #7EA5ED; font-size: 11px; padding: 2px 4px; }
-.gpf-panels label { margin-top: 5px; }
-.gpf-panels .pull-left { float: left; }
-.gpf-panels .pull-right { float: right; }
-.gpf-panels .clearfix { clear: both; }
+
+    .gpf-close { position: absolute; top: 20px; right: 35px; text-decoration: none !important; border: 1px solid #e4e4e4; border-radius: 4px; padding: 2px 7px 4px 7px; }
+
+    .gpf-panels { height: 400px; width: 400px; background: #fff; border-radius: 4px 4px 0 0; padding: 20px; border: 1px solid #eee; border-bottom: 0; }
+        .gpf-panels-inner { overflow-x: hidden; overflow-y: scroll; height: inherit; width: 380px; padding-right: 20px; }
+
+    .gpf-panels h2 { margin-bottom: 20px; }
+    .gpf-panels h3 { margin-bottom: 5px; margin-top: 15px; border-bottom: 1px solid #e6e6e6; padding-bottom: 5px; text-transform: uppercase; font-size: 10px; }
+
+    .gpf-panels .item { padding: 4px 0 4px 20px; border-bottom: 1px dashed #d6d6d6; min-height: 24px; }
+    .gpf-panels .noborder { border: 0; }
+        .gpf-panels label.checkbox input[type=checkbox] { position: relative; bottom: -2px; }
+        .gpf-panels input[type=text] { border-radius: 4px; border: 1px solid #7EA5ED; font-size: 11px; padding: 2px 4px; }
+        .gpf-panels label { margin-top: 5px; }
+        
+    .gpf-panels .pull-left { float: left; }
+    .gpf-panels .pull-right { float: right; }
+    .gpf-panels .clearfix { clear: both; }
