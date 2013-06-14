@@ -123,14 +123,14 @@ function _apply(option, value) {
             applyStyles(option, styles[option].join("\n"));
         }
     } else if (option == 'commentBoxHeight') {
-        applyStyles('commentBoxHeight', styles.commentBoxHeight.join("\n").replace('{height}', value));
+        applyStyles('commentBoxHeight', styles.commentBoxHeight.join("\n").replace('{height}', parseInt(value)));
     } else if (option == 'defaultFont') {
         applyStyles('defaultFont', styles.defaultFont.join("\n").replace('{font}', value));
     } else if (option == 'fontSize') {
-        applyStyles('fontSize', styles.fontSize.join("\n").replace('{size}', value));
+        applyStyles('fontSize', styles.fontSize.join("\n").replace('{size}', parseInt(value)));
     } else if (option == 'commentLinksColor') {
         if (value == '') {
-            removeStyles(option);            
+            removeStyles(option);          
         } else {
             applyStyles(option, styles[option].join("\n").replace('{color}', value));
         }
@@ -161,7 +161,7 @@ function _apply(option, value) {
                 .replace('{width}', value)
                 .replace('{bigPostWidth}', value - 14)
                 .replace('{widthMain}', value + 134)
-                .replace('{widthInput}', parseInt(value) - 40)
+                .replace('{widthInput}', value - 40)
             );
         }
     }
