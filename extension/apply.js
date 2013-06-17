@@ -70,6 +70,7 @@ var styles = {
         ".wIa.LP.ad .HTAwOd.RbrTP.PMortc { width: {width}px !important; }",
         ".wIa.LP.ad .oeIGR { width: {width}px !important; }",
         ".wIa.LP.ad .uBFlYd.EyKftc { width: {widthInput}px !important; max-width: none !important; }",
+        ".HTAwOd .Pw3i3b.ee3yFe { width: {width}px !important; }",
         // Communities view
         ".VsujAd { width: 100% !important; }",
         ".HTAwOd.RbrTP.cB8ykb { width: {width}px !important; }",
