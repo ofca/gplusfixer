@@ -62,7 +62,7 @@ var styles = {
         ".qyoDxe.v2DU7e { width: {layoutWidth}px !important; }",
         ".HTAwOd.RbrTP.PMortc { width: {contentWidth2}px !important; }",
         ".HTAwOd.RbrTP.cB8ykb { width: {contentWidth3}px !important; }",
-        ".Pw3i3b.ee3yFe.VsujAd.XkmQbb, .Pw3i3b.ee3yFe.oeIGR.XkmQbb { width: {boxWidth}px !important; }"
+        ".HTAwOd .Pw3i3b.ee3yFe { width: {boxWidth}px !important; }"
     ],
     'layoutSingleColumn': [
         // Remove left margin from posts in columns
