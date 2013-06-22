@@ -27,7 +27,7 @@ var styles = {
         ".M8jNpf { box-shadow: none !important; }",
 
         /* Margin from the left in gallery view */
-        ".Nj.mu.ub9Ddb { margin-left: 70px; }"
+        ".Nj.mu.ub9Ddb { margin-left: 70px !important; }"
     ],
     'removeScrolls': [
         /* Notification window scroll */
@@ -72,7 +72,7 @@ var styles = {
         ".wIa.LP.ad .XkmQbb+.XkmQbb { margin-left: 0 !important; }",
         ".wIa.LP.ad .HTAwOd.RbrTP.PMortc { width: {width}px !important; }",
         ".wIa.LP.ad .oeIGR { width: {width}px !important; }",
-        ".wIa.LP.ad .uBFlYd.EyKftc { width: {widthInput}px !important; max-width: none !important; }",
+        ".wIa.LP.ad .uBFlYd.EyKftc { width: {widthInput}px !important; max-width: none !important; left: -10px !important; }",
         ".HTAwOd .Pw3i3b.ee3yFe { width: {width}px !important; }",
         // Communities view
         ".VsujAd { width: 100% !important; }",
