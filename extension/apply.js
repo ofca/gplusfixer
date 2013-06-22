@@ -75,6 +75,7 @@ var styles = {
         ".HTAwOd.RbrTP.cB8ykb { width: {width}px !important; }",
         ".qyoDxe.v2DU7e { width: {widthMain}px !important }",
         // Fix for "big post"
+        ".Tg.Sb.ChZ7Rc { float: left !important; }",
         ".ChZ7Rc .cuuzrf { border-top: 6px solid #d6d6d6 !important; border-left: 6px solid #d6d6d6 !important; border-right: 6px solid #d6d6d6 !important; margin-right: 0px !important; min-height: auto !important; padding-right: 0px !important; }",
         ".ChZ7Rc .RJekRd { width: {bigPostWidth}px !important; min-height: auto !important; float: left !important; border-left: 6px solid #d6d6d6 !important; border-right: 6px solid #d6d6d6 !important; border-bottom: 6px solid #d6d6d6 !important; bottom: 0 !important; max-width: inherit !important; position: relative !important; right: 0 !important; top: 0 !important; }",
         ".ChZ7Rc .GFyXvc { bottom: none !important; left: none !important; right: none !important; opacity: 1 !important; position: relative !important; top: none !important; visibility: visible !important; }",
