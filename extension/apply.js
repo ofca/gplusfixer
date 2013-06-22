@@ -24,7 +24,10 @@ var styles = {
         ".IvwRoc.Um8btf { left: 50px !important; }",
 
         /* Remove shadow */
-        ".M8jNpf { box-shadow: none !important; }"
+        ".M8jNpf { box-shadow: none !important; }",
+
+        /* Margin from the left in gallery view */
+        ".Nj.mu.ub9Ddb { margin-left: 70px; }"
     ],
     'removeScrolls': [
         /* Notification window scroll */
@@ -74,7 +77,7 @@ var styles = {
         // Communities view
         ".VsujAd { width: 100% !important; }",
         ".HTAwOd.RbrTP.cB8ykb { width: {width}px !important; }",
-        ".qyoDxe.v2DU7e { width: {widthMain}px !important }",
+        ".qyoDxe.v2DU7e { width: {widthMain}px !important }",        
         // Fix for "big post"
         //".Tg.Sb.ChZ7Rc { float: left !important; }",
         ".ChZ7Rc .cuuzrf { border-top: 6px solid #d6d6d6 !important; border-left: 6px solid #d6d6d6 !important; border-right: 6px solid #d6d6d6 !important; margin-right: 0px !important; min-height: auto !important; padding-right: 0px !important; }",
