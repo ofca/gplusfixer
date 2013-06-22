@@ -1,82 +1,5 @@
 (function(window) {
-    window.addEventListener('DOMContentLoaded', function(event) {
 
-        
-    });
-
-/*
-    xmlHttpRequst = new XMLHttpRequest();
-
-    // Open Http Request connection
-    xmlHttpRequst.open('POST', 'https://plus.google.com/_/communities/gethome?hl=en_GB&ozv=es_oz_20130516.11_p2&avw=str%3A1&fsid=306639255&_reqid=94075329&rt=j', true);
-    // Set request header (optional if GET method is used)
-    xmlHttpRequst.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    // Callback when ReadyState is changed.
-    xmlHttpRequst.onreadystatechange = function()
-    {
-        if (xmlHttpRequst.readyState == 4)
-        {
-            var json = xmlHttpRequst.responseText.slice(5),
-                instring = false,
-                inescape = false,
-                lastChar = '',
-                output = '',
-                ch = '';
-
-            for (var i = 0; i < json.length-1; i++) {
-                ch = json[i];
-
-                if (!instring && /\s/.test(ch)) {
-                    continue;
-                }
-
-                if (instring) {
-                    if (inescape) {
-                        output += ch;
-                        inescape = false;
-                    } else if (ch == '\\') {
-                        output += ch;
-                        inescape = false;
-                    } else if (ch == '"') {
-                        output += ch;
-                        instring = false;
-                    } else {
-                        output += ch;
-                    }
-                    lastChar = ch;
-                    continue;
-                }
-
-                switch (ch) {
-                    case '"':
-                        output += ch;
-                        instring = true;
-                        break;
-                    case ',':
-                        if (lastChar == ',' || lastChar == '[' || lastChar == '{') {
-                            output += 'null';
-                        }
-                        output += ch;
-                        break;
-                    case ']':
-                    case '}':
-                        if (lastChar == ',') {
-                            output += 'null';                            
-                        }
-                        output += ch;
-                        break;
-                    default:
-                        output += ch;
-                        break;
-                }
-                lastChar = ch;
-            }
-
-            console.log(JSON.parse(output+']'));
-        }
-    }
-    xmlHttpRequst.send('f.req=%5Bfalse%2Cfalse%5D&at=AObGSAjYWIpvgRt7ZBDsnktQJHXsJ4iVuw%3A1368989727252&');
-*/
     function _$(s, c) {
         var m = {
             '#': 'ById',
@@ -101,7 +24,9 @@
         // Open Http Request connection
         xhr.open(o.method, o.url, true);
         // Set request header (optional if GET method is used)
-        //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        if (o.contentType) {
+            xhr.setRequestHeader('Content-Type', o.contentType);
+        }
         // Callback when ReadyState is changed.
         xhr.onreadystatechange = function()
         {
@@ -147,8 +72,10 @@
             'slimNav', 
             'commentLinksColor',
             'layoutDefaultColumn',
-            'layoutSingleColumn'
+            'layoutSingleColumn',
+            'slimNavCommunitiesWidget'
         ],
+        communitiesWidgetTimeout: null,
         init: function() {
             gpf.dom.body = _$('=body')[0];
             gpf.dom.head = _$('=head')[0];
@@ -241,10 +168,36 @@
 
                                 chrome.storage.sync.set(obj);
 
+                                // Do not apply any styles
+                                if (option == 'slimNavCommunitiesWidget') {
+                                    if (this.checked) {
+                                        me.getCommunities();
+                                    } else {
+                                        var _tmp = _qs('div[guidedhelpid="ribbon_communities"] div.A9a.bOa');
+                                        _tmp.innerHTML = 'Communities';
+                                        _tmp.className = 'A9a bOa';
+                                        clearTimeout(me.communitiesWidgetTimeout);
+                                        me.communitiesWidgetTimeout = null;
+                                    }
+                                    return;
+                                }
+
                                 req.option = option;
                                 req.value = this.checked;
 
                                 me.sendMessage(req);
+
+                                // Communities widget checkbox enable/disable
+                                if (option == 'slimNav') {
+                                    if (this.checked) {
+                                        _$('#gpf-slimNavCommunitiesWidget').removeAttribute('disabled');
+                                    } else {
+                                        var _tmp = _$('#gpf-slimNavCommunitiesWidget')
+                                        _tmp.setAttribute('disabled', 'disabled');
+                                        _tmp.checked = false;
+                                        chrome.storage.sync.set({'slimNavCommunitiesWidget':false});
+                                    }
+                                }
                             });
                             break;
                     }
@@ -339,6 +292,12 @@
                                 el.value = item[list[i]];
                                 break;
                             case 'checkbox':
+                                if (list[i] == 'slimNavCommunitiesWidget' && item[list[i]] == true) {
+                                    var _tmp = _$('#gpf-slimNavCommunitiesWidget');
+                                    _tmp.removeAttribute('disabled');
+                                    _tmp.checked = true;
+                                    me.getCommunities();
+                                }
                                 el.checked = true;
                                 break;
                             case 'select-one':
@@ -385,6 +344,118 @@
         },
         sendMessage: function(o) {
             chrome.extension.sendMessage(o); 
+        },
+        getCommunities: function() {
+            var me = gpf;
+            var _tmp = _qs('div[guidedhelpid="ribbon_communities"] div.A9a.bOa');
+            _tmp.innerHTML = 'Communities';
+            _tmp.className = 'A9a bOa';
+            // @todo Simplify below code.
+            // https://plus.google.com/u/0/communities returning what we need -
+            // some regex would be enough to get JSON object from page content.
+            // Second ajax request is not required (but now it's easier for get
+            // JSON object)
+            _ajax({
+                method: 'GET',
+                url: 'https://plus.google.com/u/0/communities',
+                complete: function(response) {
+                    var at = null;
+
+                    if (/csi\.gstatic\.com/.test(response)) {
+                        at = response.match(/csi\.gstatic\.com\/csi","([^"]+)/)[1];
+                    }
+
+                    if (at) {
+                        _ajax({
+                            method: 'POST',
+                            url: 'https://plus.google.com/_/communities/gethome',
+                            data: 'f.req=%5Bfalse%2Cfalse%5D&at='+at+'&',
+                            contentType: 'application/x-www-form-urlencoded',
+                            complete: function(response) {
+                                var json = response.slice(5),
+                                    instring = false,
+                                    inescape = false,
+                                    lastChar = '',
+                                    output = '',
+                                    ch = '';
+
+                                for (var i = 0; i < json.length-1; i++) {
+                                    ch = json[i];
+
+                                    if (!instring && /\s/.test(ch)) {
+                                        continue;
+                                    }
+
+                                    if (instring) {
+                                        if (inescape) {
+                                            output += ch;
+                                            inescape = false;
+                                        } else if (ch == '\\') {
+                                            output += ch;
+                                            inescape = false;
+                                        } else if (ch == '"') {
+                                            output += ch;
+                                            instring = false;
+                                        } else {
+                                            output += ch;
+                                        }
+                                        lastChar = ch;
+                                        continue;
+                                    }
+
+                                    switch (ch) {
+                                        case '"':
+                                            output += ch;
+                                            instring = true;
+                                            break;
+                                        case ',':
+                                            if (lastChar == ',' || lastChar == '[' || lastChar == '{') {
+                                                output += 'null';
+                                            }
+                                            output += ch;
+                                            break;
+                                        case ']':
+                                        case '}':
+                                            if (lastChar == ',') {
+                                                output += 'null';                            
+                                            }
+                                            output += ch;
+                                            break;
+                                        default:
+                                            output += ch;
+                                            break;
+                                    }
+                                    lastChar = ch;
+                                }
+                                
+                                var data = JSON.parse(output+']'),
+                                    communities = data[0][5],
+                                    item, community, newNum = 0, id, name, imageUrl,
+                                    i = 0, len = communities.length,
+                                    cnt = _qs('div[guidedhelpid="ribbon_communities"] div.A9a.bOa');
+
+                                for (; i < len; i++) {
+                                    item = communities[i][0];
+                                    community = item[0];
+                                    newNum = item[4][1];
+                                    id = community[0];
+                                    name = community[1][0];
+                                    imageUrl = community[1][3];
+
+                                    if (newNum > 0) {
+                                        cnt.innerHTML += '<a href="communities/'+id+'"><img src="'+imageUrl+'" class="gpf-community-widget-img" /><span class="gpf-community-widget-name">'+name+'</span><span class="gpf-community-widget-num">'+newNum+'</span></a>';
+                                    }
+                                }
+
+                                cnt.className += ' gpf-community-widget';
+                                _qs('.FW9qdb.F9a.SX').setAttribute('alt', 'Communities');
+
+                                setTimeout(function() { me.getCommunities(); }, 30000);
+                            }
+                        });
+                    }
+                }
+            });
         }
     };
 

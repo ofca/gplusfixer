@@ -17,3 +17,9 @@
     .gpf-panels .pull-left { float: left; }
     .gpf-panels .pull-right { float: right; }
     .gpf-panels .clearfix { clear: both; }
+
+    .gpf-community-widget { width: 250px !important; height: 200px !important; overflow: scroll; max-width: inherit !important; padding: 20px !important; }
+        .gpf-community-widget a { display: block !important; padding: 0px 10px !important; margin-top: 10px !important; color: gray !important; position: relative; }
+        .gpf-community-widget-img { width: 20px; margin-right: 10px; vertical-align: middle; }
+        .gpf-community-widget-name { font-size: 11px !important; }
+        .gpf-community-widget-num { background: #E01B5D; color: #fff; border-radius: 4px; padding: 5px 5px; position: absolute !important; top: 2px !important; right: 0px !important; width: 28px; text-align: center; font-size: 11px !important; }
