@@ -62,7 +62,7 @@ var styles = {
         ".qyoDxe.v2DU7e { width: {layoutWidth}px !important; }",
         ".HTAwOd.RbrTP.PMortc { width: {contentWidth2}px !important; }",
         ".HTAwOd.RbrTP.cB8ykb { width: {contentWidth3}px !important; }",
-        ".Pw3i3b.ee3yFe.VsujAd.XkmQbb, .Pw3i3b.ee3yFe.oeIGR.XkmQbb { width: {boxWidth}px !important; }"
+        ".HTAwOd .Pw3i3b.ee3yFe { width: {boxWidth}px !important; }"
     ],
     'layoutSingleColumn': [
         // Remove left margin from posts in columns
@@ -70,6 +70,7 @@ var styles = {
         ".wIa.LP.ad .HTAwOd.RbrTP.PMortc { width: {width}px !important; }",
         ".wIa.LP.ad .oeIGR { width: {width}px !important; }",
         ".wIa.LP.ad .uBFlYd.EyKftc { width: {widthInput}px !important; max-width: none !important; }",
+        ".HTAwOd .Pw3i3b.ee3yFe { width: {width}px !important; }",
         // Communities view
         ".VsujAd { width: 100% !important; }",
         ".HTAwOd.RbrTP.cB8ykb { width: {width}px !important; }",
@@ -124,14 +125,14 @@ function _apply(option, value) {
             applyStyles(option, styles[option].join("\n"));
         }
     } else if (option == 'commentBoxHeight') {
-        applyStyles('commentBoxHeight', styles.commentBoxHeight.join("\n").replace('{height}', value));
+        applyStyles('commentBoxHeight', styles.commentBoxHeight.join("\n").replace('{height}', parseInt(value)));
     } else if (option == 'defaultFont') {
         applyStyles('defaultFont', styles.defaultFont.join("\n").replace('{font}', value));
     } else if (option == 'fontSize') {
-        applyStyles('fontSize', styles.fontSize.join("\n").replace('{size}', value));
+        applyStyles('fontSize', styles.fontSize.join("\n").replace('{size}', parseInt(value)));
     } else if (option == 'commentLinksColor') {
         if (value == '') {
-            removeStyles(option);            
+            removeStyles(option);          
         } else {
             applyStyles(option, styles[option].join("\n").replace('{color}', value));
         }
@@ -162,7 +163,7 @@ function _apply(option, value) {
                 .replace('{width}', value)
                 .replace('{bigPostWidth}', value - 14)
                 .replace('{widthMain}', value + 134)
-                .replace('{widthInput}', parseInt(value) - 40)
+                .replace('{widthInput}', value - 40)
             );
         }
     }
