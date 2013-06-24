@@ -437,12 +437,12 @@
                                 for (; i < len; i++) {
                                     item = communities[i][0];
                                     community = item[0];
-                                    newNum = item[4][1];
+                                    newNum = item[4][1] > 99 ? '99+' : item[4][1];
                                     id = community[0];
                                     name = community[1][0];
                                     imageUrl = community[1][3];
 
-                                    if (newNum > 0) {
+                                    if (newNum > 0 || newNum === '99+') {
                                         cnt.innerHTML += '<a href="communities/'+id+'"><img src="'+imageUrl+'" class="gpf-community-widget-img" /><span class="gpf-community-widget-name">'+name+'</span><span class="gpf-community-widget-num">'+newNum+'</span></a>';
                                     }
                                 }
