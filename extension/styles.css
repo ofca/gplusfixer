@@ -10,6 +10,7 @@
 
     .gpf-panels .item { padding: 4px 0 4px 20px; border-bottom: 1px dashed #d6d6d6; min-height: 24px; }
     .gpf-panels .noborder { border: 0; }
+    .gpf-panels .new-in-version { color: red; font-weight: bold; font-size: smaller; float: right;}
         .gpf-panels label.checkbox input[type=checkbox] { position: relative; bottom: -2px; }
         .gpf-panels input[type=text] { border-radius: 4px; border: 1px solid #7EA5ED; font-size: 11px; padding: 2px 4px; }
         .gpf-panels label { margin-top: 5px; }

@@ -55,6 +55,13 @@
         }
     };
 
+    Element.prototype.css = function(prop, value) {
+        if (value)
+            this.style[prop] = value;
+        else
+            return this.style[prop];
+    };
+
     var gpf = {
         rendered: false,
         dom: {
@@ -73,7 +80,8 @@
             'commentLinksColor',
             'layoutDefaultColumn',
             'layoutSingleColumn',
-            'slimNavCommunitiesWidget'
+            'slimNavCommunitiesWidget',
+            'layoutHangoutVisibility'
         ],
         communitiesWidgetTimeout: null,
         init: function() {
@@ -196,6 +204,15 @@
                                         _tmp.setAttribute('disabled', 'disabled');
                                         _tmp.checked = false;
                                         chrome.storage.sync.set({'slimNavCommunitiesWidget':false});
+                                    }
+                                }
+
+                                // Setting Visibility of Hangout column
+                                if (option == 'layoutHangoutVisibility') {
+                                    if (this.checked) {
+                                        _$('#ozIdRtRibbonChatRoster').css('display', 'none');
+                                    } else {
+                                        _$('#ozIdRtRibbonChatRoster').css('display', 'block');
                                     }
                                 }
                             });
@@ -437,12 +454,12 @@
                                 for (; i < len; i++) {
                                     item = communities[i][0];
                                     community = item[0];
-                                    newNum = item[4][1];
+                                    newNum = item[4][1] > 99 ? '99+' : item[4][1];
                                     id = community[0];
                                     name = community[1][0];
                                     imageUrl = community[1][3];
 
-                                    if (newNum > 0) {
+                                    if (newNum > 0 || newNum === '99+') {
                                         cnt.innerHTML += '<a href="communities/'+id+'"><img src="'+imageUrl+'" class="gpf-community-widget-img" /><span class="gpf-community-widget-name">'+name+'</span><span class="gpf-community-widget-num">'+newNum+'</span></a>';
                                     }
                                 }
