@@ -55,6 +55,13 @@
         }
     };
 
+    Element.prototype.css = function(prop, value) {
+        if (value)
+            this.style[prop] = value;
+        else
+            return this.style[prop];
+    };
+
     var gpf = {
         rendered: false,
         dom: {
@@ -73,7 +80,8 @@
             'commentLinksColor',
             'layoutDefaultColumn',
             'layoutSingleColumn',
-            'slimNavCommunitiesWidget'
+            'slimNavCommunitiesWidget',
+            'layoutHangoutVisibility'
         ],
         communitiesWidgetTimeout: null,
         init: function() {
@@ -196,6 +204,15 @@
                                         _tmp.setAttribute('disabled', 'disabled');
                                         _tmp.checked = false;
                                         chrome.storage.sync.set({'slimNavCommunitiesWidget':false});
+                                    }
+                                }
+
+                                // Setting Visibility of Hangout column
+                                if (option == 'layoutHangoutVisibility') {
+                                    if (this.checked) {
+                                        _$('#ozIdRtRibbonChatRoster').css('display', 'none');
+                                    } else {
+                                        _$('#ozIdRtRibbonChatRoster').css('display', 'block');
                                     }
                                 }
                             });

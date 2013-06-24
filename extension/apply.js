@@ -89,6 +89,10 @@ var styles = {
         /*".Ri07Rc.c-b { height: 40px !important; min-height: inherit !important; min-width: inherit !important; width: 100px !important; }",
         ".Ri07Rc.c-b .F0INOe { width: 40px !important; float: left !important; margin: 10px 10px 0px 10px; }",
         ".Ri07Rc.c-b { margin: 12px 5px 5px 5px !important; }"*/
+    ],
+    'layoutHangoutVisibility' : [
+        //hide Hangout column
+        "#ozIdRtRibbonChatRoster {display: none;}"
     ]
 };
 
@@ -100,7 +104,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 
 // Load
 var list = ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 
-            'slimNav', 'commentLinksColor', 'layoutDefaultColumn', 'layoutSingleColumn'],
+            'slimNav', 'commentLinksColor', 'layoutDefaultColumn', 'layoutSingleColumn', 'layoutHangoutVisibility'],
     len = list.length
     i = 0;
 chrome.storage.sync.get(list, function(item) {
@@ -120,7 +124,7 @@ applyStyles('common', '.q9a.fdb[role=region] { outline: none !important; }');
 
 function _apply(option, value) {
     // Checkbox like options
-    if (['slimNav', 'removeScrolls', 'fullPostContent', 'fullCommentContent']
+    if (['slimNav', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'layoutHangoutVisibility']
         .indexOf(option) != -1) {
         if (value == false) {
             removeStyles(option);
