@@ -1,53 +1,35 @@
 var styles = {
     'slimNav': [
-        ".FVPtwe { -webkit-transition: none !important; transition: none !important; }",
-        ".cInFec { -webkit-transition: none !important; transition: none !important; }",
-        ".wH3YRe { margin-left: 0 !important; overflow: visible !important; width: 50px !important; padding-left: 0 !important; }",
-
-        /* labels */
-        ".A9a.bOa { display: none !important; }",
-        /* span */
-        ".hAmwye { display: none !important; }",
-
-        /* links */
-        ".cS.xWa > a { height: 34px !important; padding-left: 15px !important; }",
-        /* hover on link */
-        ".cS.xWa > a:hover { background: none !important; }",
-        ".cS.xWa:hover .A9a.bOa { display: inline !important; position: absolute !important; z-index: 9999 !important; border-radius: 5px !important; background: #fff !important; padding: 4px 10px !important; }",
-
-        /* footer */
-        ".lZkdDe.pFZ7Ne { display: none !important; }",
-
-        "#contentPage { margin-left: 60px !important; }",
-
-        /* header with page title */
-        ".IvwRoc.Um8btf { left: 50px !important; }",
-
-        /* Remove shadow */
-        ".M8jNpf { box-shadow: none !important; }",
-
-        /* Margin from the left in gallery view */
-        ".Nj.mu.ub9Ddb { margin-left: 70px !important; }"
+        ".xpd.Rce.V9d.b-K { margin-left: 0px !important; width: 45px !important; padding-left: 0px !important;  position: fixed !important; left: 0px !important; top: 120px !important; height: 390px !important; border-radius: 0px 6px 6px 0px !important; padding-top: 10px !important; overflow: visible !important; }",
+        // <a> element
+        ".xpd.Rce .hGa { padding: 0 !important; height: auto !important; width: 100% !important; }",
+        ".xpd.Rce .Lyd.wwc { display: none !important; position: absolute !important; top: 2px !important; background: #fff !important; left: 30px !important; padding: 5px 10px !important; }",
+        ".xpd.Rce .hGa:hover .Lyd.wwc { display: block !important; }",
+        // Separator line
+        ".xpd.Rce .IRd { display: none; }",
+        ".xpd.Rce .HRd { display: inline-block !important; padding: 6px 10px !important; height: auto !important; }",
+        ".OLa { display: none !important; }"
     ],
     'removeScrolls': [
         /* Notification window scroll */
         /* First expression is for normal post*/
         ".CLSMk { max-height: none !important; }",
         // This is for 3-column wide posts 
-        ".qf.ii.wv4ec.r6Rtbe .CLSMk { max-height: 100px !important; }"
+        ".qf.ii.wv4ec.r6Rtbe .CLSMk { max-height: 100px !important; }",
+        // comments scrollbar
+        ".EB { max-height: inherit !important; }",
+        ".tO { overflow-y: visible !important; }"
     ],
     'fullPostContent': [
         /* post content */
-        ".WamaFb.DIcL3e { max-height: inherit !important; }",
+        ".Hs.zm { max-height: inherit !important; }",
         /* "read more" button in post */
-        ".a-n.fE.syxni.JBNexc { display: none !important; }",
+        ".d-s.ov.Fs.QG.cj[role='button'] { display: none !important; }",
     ],
     'fullCommentContent': [
-        /* comment content */
-        ".Mi.Vp.WamaFb.Gw.Gm { max-height: none !important; }",
-
-        /* comment "read more" */
-        ".a-n.wj.syxni.unQkyd[role=button], .a-n.vj.unQkyd[role=button] { display: none !important; }",
+        // comment content
+        '.Rp.JJ.Hs.mQ.rz { max-height: inherit !important; }',
+        '.d-s.Gp.bn Po[role="button"] { display: none; }'
     ],
     'commentBoxHeight': [
         ".yd.editable[role=textbox] { max-height: {height}px !important; }"
@@ -100,7 +82,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 
 // Load
 var list = ['commentBoxHeight', 'removeScrolls', 'fullPostContent', 'fullCommentContent', 'defaultFont', 'fontSize', 
-            'slimNav', 'commentLinksColor', 'layoutDefaultColumn', 'layoutSingleColumn'],
+            /*'slimNav',*/ 'commentLinksColor', 'layoutDefaultColumn', 'layoutSingleColumn'],
     len = list.length
     i = 0;
 chrome.storage.sync.get(list, function(item) {
@@ -116,7 +98,10 @@ chrome.storage.sync.get(list, function(item) {
     }
 });
 
+_apply('slimNav', true);
 applyStyles('common', '.q9a.fdb[role=region] { outline: none !important; }');
+
+/* -- FUNCTIONS DEFINITIONS -- */
 
 function _apply(option, value) {
     // Checkbox like options

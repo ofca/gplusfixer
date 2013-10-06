@@ -3,13 +3,7 @@
 
     "name": "GPlusFixer",
     "description": "Ofca for the rescue! Removes some minor bugs from new version of GooglePlus",
-    "version": "0.3",
-
-    /*"browser_action": {
-        "default_icon": "ofca-hat-48.png",
-        "default_popup": "popup.html",
-        "default_title": "GPlusFixer"
-    },*/
+    "version": "0.5",
 
     "background": {
         "page": "background.html"

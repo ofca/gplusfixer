@@ -73,7 +73,7 @@
             'commentLinksColor',
             'layoutDefaultColumn',
             'layoutSingleColumn',
-            'slimNavCommunitiesWidget'
+            //'slimNavCommunitiesWidget'
         ],
         communitiesWidgetTimeout: null,
         init: function() {
@@ -120,10 +120,15 @@
 
                         var div = document.createElement('div');
                         div.innerHTML = tmpl;
+                        div = div.children[0];
                         last.parentNode.insertBefore(div, last.nextSibling);
 
                         _bind(div, 'click', me.onSettingTabClick);
                     }
+
+                    // Remove nav footer
+                    var footer = document.querySelector('.xpd.Rce > .Tce.W9d');
+                    if (footer) footer.parentNode.removeChild(footer);
 
                     me.rendered = true;
 
@@ -169,7 +174,7 @@
                                 chrome.storage.sync.set(obj);
 
                                 // Do not apply any styles
-                                if (option == 'slimNavCommunitiesWidget') {
+                                /*if (option == 'slimNavCommunitiesWidget') {
                                     if (this.checked) {
                                         me.getCommunities();
                                     } else {
@@ -180,7 +185,7 @@
                                         me.communitiesWidgetTimeout = null;
                                     }
                                     return;
-                                }
+                                }*/
 
                                 req.option = option;
                                 req.value = this.checked;
@@ -292,12 +297,12 @@
                                 el.value = item[list[i]];
                                 break;
                             case 'checkbox':
-                                if (list[i] == 'slimNavCommunitiesWidget' && item[list[i]] == true) {
+                                /*if (list[i] == 'slimNavCommunitiesWidget' && item[list[i]] == true) {
                                     var _tmp = _$('#gpf-slimNavCommunitiesWidget');
                                     _tmp.removeAttribute('disabled');
                                     _tmp.checked = true;
                                     me.getCommunities();
-                                }
+                                }*/
                                 el.checked = true;
                                 break;
                             case 'select-one':
