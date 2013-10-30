@@ -3,7 +3,7 @@
 
     "name": "GPlusFixer",
     "description": "Ofca for the rescue! Removes some minor bugs from new version of GooglePlus",
-    "version": "0.5.1",
+    "version": "0.5.2",
 
     "background": {
         "page": "background.html"

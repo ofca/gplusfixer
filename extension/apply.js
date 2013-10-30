@@ -1,15 +1,17 @@
 var styles = {
     'slimNav': [
-        ".b-K.b-K-Xb.yld { margin-left: 0px !important; width: 45px !important; padding-left: 0px !important;  position: fixed !important; left: 0px !important; top: 120px !important; height: 390px !important; border-radius: 0px 6px 6px 0px !important; padding-top: 10px !important; overflow: visible !important; }",
+        // Main nav container
+        ".Msd.Fge.Ide { margin-left: 0px !important; width: 45px !important; padding-left: 0px !important;  position: fixed !important; left: 0px !important; top: 120px !important; height: 390px !important; border-radius: 0px 6px 6px 0px !important; padding-top: 10px !important; overflow: visible !important; opacity: 1 !important; }",
         // <a> element
-        ".b-K.b-K-Xb.yld .ob { padding: 0 !important; height: auto !important; width: 100% !important; text-align: center !important; }",
-        ".b-K.b-K-Xb.yld .lCd { display: none !important; position: absolute !important; top: 2px !important; background: #fff !important; left: 30px !important; padding: 5px 10px !important; }",
-        ".b-K.b-K-Xb.yld .wVd { padding: 6px 0; }",
-        ".b-K.b-K-Xb.yld .ob:hover .lCd { display: block !important; }",
+        ".Msd.Fge.Ide .ob { padding: 0 !important; height: auto !important; width: 100% !important; text-align: center !important; }",
+        ".Msd.Fge.Ide .lCd { display: none !important; position: absolute !important; top: 2px !important; background: #fff !important; left: 30px !important; padding: 5px 10px !important; }",
+        ".Msd.Fge.Ide .wVd { padding: 6px 0; }",
+        ".Msd.Fge.Ide .ob:hover .lCd { display: block !important; }",
         // Separator line
-        ".b-K.b-K-Xb.yld .xVd { display: none; }",
-        ".b-K.b-K-Xb.yld .HRd { display: inline-block !important; padding: 6px 10px !important; height: auto !important; }",
-        ".Dge.fOa.vld, .Hge.Lde.Ald { display: none !important; }"
+        ".Msd.Fge.Ide .xVd { display: none; }",
+        /*".b-K.b-K-Xb.yld .HRd { display: inline-block !important; padding: 6px 10px !important; height: auto !important; }",*/
+        // Hide nav "button" & footer
+        ".Dge.fOa.vld, .Msd.Fge.Ide .Hge.Lde { display: none !important; }"
     ],
     'removeScrolls': [
         /* Notification window scroll */
