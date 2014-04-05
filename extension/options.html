@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GPlusFixer Options page</title>
+        <style>
+            @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 400;
+                margin: 40px 20px 40px 40px;
+                font-size: 13px;
+            }
+
+            .pull-left {
+                float: left;
+            }
+
+            .clearfix {
+                width: 100%;
+            }
+
+            /* -- GPlusFixer name */
+            .gplusfixer {                
+                font-weight: 800;
+                
+            }
+            .gplusfixer span:first-child {
+                color: #616161;
+            }
+            .gplusfixer span:nth-child(2) {
+                color: #D70060;
+            }
+            .gplusfixer span:nth-child(3) {
+                color: #616161;
+            }
+
+            /* -- Header */
+            header .gplusfixer {
+                font-size: 60px;
+                letter-spacing: -3px;
+            }
+            h1 {
+                margin-bottom: 0;                
+            }
+            .version-line {
+                margin-top: -10px;
+                color: gray;
+            }
+            .version-line span {
+                font-weight: 800;
+            }
+
+            h2 {
+                border-bottom: 1px dashed #e6e6e6;
+                letter-spacing: -1px;
+                text-transform: uppercase;
+                color: gray;
+            }
+
+            .main {
+                width: 400px;
+                float: left;
+            }
+            .help-me {
+                display: block;
+                margin-left: 440px;
+                height: 100px;
+                padding-top: 1px;
+            }
+            .help-me > div {
+                display: none;
+            }
+            .help-me > div img {
+                /*width: 500px;*/
+            }
+            .help-me > div > .pull-left:nth-child(3) {
+                margin-right: 15px;
+            }
+
+            /* -- Form */
+            fieldset {
+                border: 1px solid #e6e6e6;
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+
+            legend {
+                text-transform: uppercase;
+                font-weight: 800;
+            }
+
+            .btn {
+                background: #00A1CB;
+                color: #fff;
+                padding: 2px 6px;
+            }
+
+            input[type=text] {
+                background: #00A1CB;
+                width: 100%;
+                color: #fff;
+                border: 0;
+                padding: 2px 6px;
+            }
+
+            .row {
+                content: ' ';
+                clear: both;
+                margin: 10px 0 10px 0;
+                padding: 0 40px 0 20px;
+                position: relative;
+            }
+
+            .row > label {
+                float: left;
+                width: 120px;
+            }
+
+            .row > .control-group {
+                margin-left: 120px;
+                display: block;
+            }
+
+            .help {
+                z-index: 1;
+                top: 2px;
+                position: absolute;
+                right: 5px;
+                cursor: pointer;
+            }
+            .help:before {
+                text-align: center;
+                width: 20px;
+                height: 20px;
+                content: '?';
+                border-radius: 180px;
+                background: #e6e6e6;
+                color: gray;
+                line-height: 20px;
+                font-size: 12px;
+                font-weight: 700;
+                display: inline-block;
+                margin-left: 10px;
+            }
+
+            #colors-list li {
+                border-bottom: 1px solid #fff;
+                color: #fff;
+            }
+
+            /* - Select box */
+            .selectbox {
+
+            }
+
+            .selectbox > label {
+                display: block;
+                min-height: 20px;
+                cursor: pointer;
+            }
+
+            .selectbox > ul {
+                display: none;
+                list-style: none;
+                margin: 10px 0;
+                padding: 0;
+            }
+
+            .selectbox.expanded > ul {
+                display: block;
+                max-height: 200px;
+                overflow-y: scroll;
+            }
+
+            .selectbox > ul > li {
+                padding: 5px;
+                border-bottom: 1px solid #e6e6e6;
+                cursor: pointer;
+            }
+
+            .selectbox > ul > li:hover {
+                background: #e6e6e6;
+            }
+
+            /* - Checkboxes */
+            .checkbox { 
+                
+            }
+            .checkbox input[type=checkbox] {
+                display: none;
+            }
+
+            .checkbox label {
+                cursor: pointer;
+            }
+
+            .checkbox label:before {
+                background: #01A4A4;
+                color: #01A4A4;
+                content: '+';
+                display: inline-block;
+                font-weight: 700;
+                font-size: 16px;
+                margin-right: 10px;
+                padding: 3px;
+                line-height: 10px;
+            }
+
+            .checkbox input[type=checkbox]:checked + label:before {
+                color: #fff;
+            }
+
+            
+        </style>
+        
+    </head>
+    <body>
+        <header>
+            <h1 class='gplusfixer'><span>G</span><span>Plus</span><span>Fixer</span></h1>
+            <p class='version-line'>Current version: <span id='version'></span></p>
+        </header>
+        <div class='main'>
+            <h2>Configuration</h2>
+            <fieldset>
+                <legend>Posts</legend>
+                <div class='row'>
+                    <div class="checkbox">
+                        <input type="checkbox" value="1" id="full-post-content" data-autosave='fullPostContent'>
+                        <label for="full-post-content">Display full post content</label>
+                        <span class='help' data-id='full-post-content'></span>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class="checkbox">
+                        <input type="checkbox" value="1" id="gif-stop" data-autosave='gifStop'>
+                        <label for="gif-stop">Play GIF when mouse is over image</label>
+                        <span class='help' data-id='gif-stop'></span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Comments</legend>
+                <div class='row'>
+                    <div class="checkbox">
+                        <input type="checkbox" value="1" id="full-comment-content" data-autosave='fullCommentContent'>
+                        <label for="full-comment-content">Display full comment content</label>
+                        <span class='help' data-id='full-comment-content'></span>
+                    </div>                    
+                </div>
+                <div class='row'>
+                    <div class="checkbox">
+                        <input type="checkbox" value="1" id="striped-comments" data-autosave='stripedComments'>
+                        <label for="striped-comments">Striped comments</label>
+                        <span class='help' data-id='striped-comments'></span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Misc</legend>
+                <div class='row'>
+                    <div class="checkbox">
+                        <input type="checkbox" value="1" id="slim-nav" data-autosave='slimNav'>
+                        <label for="slim-nav">Slim navigation</label>
+                        <span class='help' data-id='slim-nav'></span>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class="checkbox">
+                        <input type="checkbox" value="1" id="remove-scrolls" data-autosave='removeScrolls'>
+                        <label for="remove-scrolls">Remove unnecessary (aka annoying) scrolls</label>
+                        <span class='help' data-id='remove-scrolls'></span>
+                    </div>
+                </div>
+                <div class='row'>
+                    <label>Default font:</label>
+                    <div class='control-group selectbox' data-autosave='fontName'>
+                        <label class='btn'>Click to select...</label>
+                        <ul id='fonts-list'>
+                            <li>--- Default ---</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class='row'>
+                    <label>Font size:</label>
+                    <div class='control-group selectbox' data-autosave='fontSize'>
+                        <label class='btn'>Click to select...</label>
+                        <ul>
+                            <li>--- Default ---</li>
+                            <li>8px</li>
+                            <li>10px</li>
+                            <li>12px</li>
+                            <li>14px</li>
+                            <li>16px</li>
+                            <li>18px</li>
+                            <li>20px</li>
+                            <li>22px</li>
+                            <li>24px</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class='row'>
+                    <label>Links color</label>
+                    <div class='control-group selectbox' data-autosave='linksColor'>
+                        <label class='btn'>Click to select...</label>
+                        <ul id='colors-list'>
+                            <li style='background: blue'>--- Default ---</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class='row'>
+                    <label for='background'>Background</label>
+                    <div class='control-group'>
+                        <input type='text' id='background' data-autosave='background'>
+                        <span class='help' data-id='background'></span>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div id='help-me' class='help-me'>
+            <div id='help-me-latest-changes'>                
+                <h2>Latest changes</h2>
+                <h3>v0.7 (soon)</h3>
+                <ul>
+                    <li>Post subscribing!</li>
+                </ul>
+                <h3>v0.6</h3>
+                <ul>
+                    <li>Whole extension rewrited using CoffeeScript</li>
+                    <li>New look&amp;feel</li>
+                    <li>Configuration stored in browsers local storage (end of sharing configuration between devices)</li>
+                    <li>Ability to stop GIF images and play them on mouse hover</li>
+                    <li>Comments stripes</li>
+                    <li>Font changer restored</li>
+                    <li>Font size changer restored</li>
+                    <li>Color links changer restored</li>
+                    <li>Ability to place your own image on the site background</li>
+                </ul>
+                <h3>v0.1-0.5.x</h3>
+                <p>No info.</p>
+            </div>
+            <div id='help-me-full-post-content'>
+                <h2>Full post content</h2>
+                <p>By default Google Plus displays only two lines of post and add this "Read more" link. <span class='gplusfixer'><span>G</span><span>Plus</span>Fixer</span> forces displaying of the entire post.</p>
+
+                <div class='pull-left'>
+                    <h3>before (original g+ view)</h3>                
+                    <img src='http://emve.org/gplusfixer/help/images/full-post-content-before.jpg'>
+                </div>
+                <div class='pull-left'>
+                    <h3>after (modificated by gplusfixer)</h3>
+                    <img src='http://emve.org/gplusfixer/help/images/full-post-content-after.jpg'>
+                </div>
+            </div>
+            <div id='help-me-full-comment-content'>
+                <h2>Full comment content</h2>
+                <p>By default Google Plus displays only two-three lines of comment and add this "Read more" link. <span class='gplusfixer'><span>G</span><span>Plus</span>Fixer</span> forces displaying of the entire comment.</p>
+
+                <div class='pull-left'>
+                    <h3>before (original g+ view)</h3>                
+                    <img src='http://emve.org/gplusfixer/help/images/full-comments-before.jpg'>
+                </div>
+                <div class='pull-left'>
+                    <h3>after (modificated by gplusfixer)</h3>
+                    <img src='http://emve.org/gplusfixer/help/images/full-comments-after.jpg'>
+                </div>
+            </div>
+            <div id='help-me-remove-scrolls'>
+                <h2>Annoying scrolls</h2>
+                <p></p>
+                <div class='pull-left'>
+                    <h3>before (original g+ view)</h3>                
+                    <img src='http://emve.org/gplusfixer/help/images/scrolls-before.jpg'>
+                </div>
+                <div class='pull-left'>
+                    <h3>after (modificated by gplusfixer)</h3>
+                    <img src='http://emve.org/gplusfixer/help/images/scrolls-after.jpg'>
+                </div>
+            </div>
+            <div id='help-me-slim-nav'>
+                <h2>Slim navigation</h2>
+                <p>Enable this option and check it by yourself.</p>
+                <div class='pull-left'>
+                    <h3>before (original g+ view)</h3>                
+                    No screenshot provided.
+                </div>
+                <div class='pull-left'>
+                    <h3>after (modificated by gplusfixer)</h3>
+                    No screenshot provided.
+                </div>
+            </div>
+            <div id='help-me-striped-comments'>
+                <h2>Striped comments</h2>
+                <p>Padding and background for comments. It looks better, realy ;)</p>
+                <div class='pull-left'>
+                    <h3>before (original g+ view)</h3>                
+                    <img src='http://emve.org/gplusfixer/help/images/striped-comments-before.jpg'>
+                </div>
+                <div class='pull-left'>
+                    <h3>after (modificated by gplusfixer)</h3>
+                    <img src='http://emve.org/gplusfixer/help/images/striped-comments-after.jpg'>
+                </div>
+            </div>
+            <div id='help-me-gif-stop'>
+                <h2>Freeze GIFs</h2>
+                <p>This feature will defaultly stop all GIF images from playing. If you want start playing GIF just put your cursor over image (but not this image below :>). Simple.</p>
+                <div class='pull-left'>
+                    <h3>modificated by gplusfixer</h3>
+                    <img src='http://emve.org/gplusfixer/help/images/gif-stop.jpg'>
+                </div>
+            </div>
+            <div id='help-me-background'>
+                <h2>Freeze GIFs</h2>
+                <p>Everybody wants to put kittens (or any other image you like ;)) on the background of the Google Plus. Just provide url of the image.</p>
+                <div class='pull-left'>
+                    <h3>modificated by gplusfixer</h3>
+                    <img src='http://emve.org/gplusfixer/help/images/background.jpg'>
+                </div>
+            </div>
+            <div id='help-me-links-color'>
+                asdf
+            </div>
+        </div>
+        <div style='width: 100%; clear: both'></div>
+        <footer>
+            Author: <a href='https://plus.google.com/+tomaszzeludziewicz' target='_blank'>Tomasz "ofca" Zeludziewicz</a><br />
+            Source code: <a href='https://github.com/ofca/gplusfixer' target='_blank'>GitHub</a><br />
+            Chrome web store: <a href='https://chrome.google.com/webstore/detail/gplusfixer/babhocojdmohnphoijcjlkhmgkojpjhl' target='_blank'>click!</a>
+        </footer>
+        <script src='font-detector.js'></script>
+        <script src='options.js'></script>
+    </body>
+</html>

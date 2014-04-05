@@ -2,8 +2,10 @@
     "manifest_version": 2,
 
     "name": "GPlusFixer",
-    "description": "Ofca for the rescue! Removes some minor bugs from new version of GooglePlus",
-    "version": "0.5.2",
+    "description": "Removes some minor bugs from new version of GooglePlus",
+    "version": "0.6",
+
+    "options_page": "options.html",
 
     "background": {
         "page": "background.html"
@@ -15,17 +17,10 @@
             "apply.js"
         ],
         "all_frames": true,
-        "run_at": "document_start"
-    },{ 
-        "matches": ["https://plus.google.com/*"],
-        "js": [
-            "ui.js"
-        ],
-        "all_frames": false,
-        "run_at": "document_start"
+        "run_at": "document_end"
     }],
     "permissions": ["tabs", "storage", "https://plus.google.com/*"],
-    "web_accessible_resources": ["ofca-hat-19.png", "styles.css", "ui.html"],
+    "web_accessible_resources": ["ofca-hat-19.png", "styles.css", "options.html", "manifest.json"],
     "icons": {
       "128": "ofca-hat-128.png",
       "48": "ofca-hat-48.png"
